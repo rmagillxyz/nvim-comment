@@ -7,7 +7,7 @@ M.config = {
   -- Linters prefer comment and line to hae a space in between
   marker_padding = true,
   -- should comment out empty or whitespace only lines
-  comment_empty = true,
+  comment_empty = false,
   -- Should key mappings be created
   create_mappings = true,
   -- Normal mode mapping left hand side
@@ -44,7 +44,8 @@ function M.comment_line(l, indent, left, right, comment_empty)
   local line = l
   local comment_pad = indent
 
-  if not comment_empty and l:match("^%s*$") then return line end
+  -- if not comment_empty and l:match("^%s*$") then return line end
+  if not comment_empty and ( l:match("^%s*$") or (string.len(line) < 1) ) then return line end
 
   -- most linters want padding to be formatted correctly
   -- so remove comment padding from line
