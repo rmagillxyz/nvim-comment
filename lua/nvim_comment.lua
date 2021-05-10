@@ -44,7 +44,8 @@ function M.comment_line(l, indent, left, right, comment_empty)
   local line = l
   local comment_pad = indent
 
-  if comment_empty and l:match("^%s*$") then return line end
+  -- if not comment_empty and l:match("^%s*$") then return line end
+  if not comment_empty and (l:match("^%s*$") or (string.len(line) < 1)) then
 
   -- most linters want padding to be formatted correctly
   -- so remove comment padding from line
